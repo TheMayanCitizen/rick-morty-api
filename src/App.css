@@ -1,0 +1,54 @@
+.app {
+  padding: 2em 1.5em;
+}
+
+.app__title {
+  text-align: center;
+  margin-bottom: 0.6em;
+  font-size: 2.5rem;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  height: 1.8em;
+  margin-bottom: 2.5em;
+}
+
+.form__input {
+  width: 100%;
+  max-width: 200px;
+  padding-left: 1em;
+  border-radius: 0.5em 0 0 0.5em;
+}
+
+.form__btn {
+  width: 80px;
+  border-radius: 0 0.5em 0.5em 0;
+  background-color: rgb(113, 167, 33);
+  color: white;
+  font-weight: 500;
+  transition: font-weight 100ms ease, filter 100ms ease;
+  cursor: pointer;
+}
+
+.form__btn:hover {
+  font-weight: 700;
+  filter: brightness(1.1);
+}
+
+.app__error {
+  text-align: center;
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+.residents__container {
+  display: flex;
+  gap: 2em;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
