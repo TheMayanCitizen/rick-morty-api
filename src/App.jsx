@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
 import LocationInfo from "./components/LocationInfo";
+import Pagination from "./components/Pagination";
 import ResidentInfo from "./components/ResidentInfo";
 import getRandomLocation from "./utils/getRandomLocation";
 
@@ -9,6 +10,8 @@ function App() {
   const [location, setLocation] = useState();
   const [numberLocation, setNumberLocation] = useState(getRandomLocation());
   const [hasError, setHasError] = useState(false);
+  const [currentPage, setCurrentePage] = useState(1);
+  const residentsPerPage = 10;
 
   useEffect(() => {
     const url = `https://rickandmortyapi.com/api/location/${numberLocation}`;
@@ -34,6 +37,17 @@ function App() {
     }
     e.target.inputLocation.value = e.target.inputLocation.value.trim();
   };
+
+  const indexOfLastPost = currentPage * residentsPerPage;
+  const indexOfFistPost = indexOfLastPost - residentsPerPage;
+  const currentResidents = location?.residents.slice(
+    indexOfFistPost,
+    indexOfLastPost
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentePage(pageNumber);
+  };
   return (
     <div className="app">
       <h1 className="app__title">Rick and Morty</h1>
@@ -46,11 +60,23 @@ function App() {
       ) : (
         <>
           <LocationInfo location={location} />
+          <Pagination
+            residentsPerPage={residentsPerPage}
+            totalResidents={location?.residents.length}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
           <div className="residents__container">
-            {location?.residents.map((url) => (
+            {currentResidents?.map((url) => (
               <ResidentInfo key={url} url={url} />
             ))}
           </div>
+          <Pagination
+            residentsPerPage={residentsPerPage}
+            totalResidents={location?.residents.length}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
         </>
       )}
     </div>
